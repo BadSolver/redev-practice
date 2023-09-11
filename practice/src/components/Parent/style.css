@@ -1,0 +1,15 @@
+.increase-btn {
+    cursor: pointer;
+}
+
+.decrease-btn {
+    cursor: pointer;
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 400px;
+    margin: 0 auto;
+}
