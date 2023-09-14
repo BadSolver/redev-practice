@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 export const LifeCycleFunction = () => {
   const [count, setCount] = useState(0);
@@ -17,7 +17,19 @@ export const LifeCycleFunction = () => {
       }
     }
     fetchData();
+
+    return () => {
+      setTodos(null);
+    };
   }, []);
+
+  useEffect(() => {
+    console.log("Текущий счётчик:", count);
+  }, [count]);
+
+  const isEven = useMemo(() => {
+    return count % 2 === 0;
+  }, [count]);
 
   const increment = () => {
     setCount(count + 1);
@@ -30,7 +42,7 @@ export const LifeCycleFunction = () => {
           return <li key={todo.id}>{todo.title}</li>;
         })}
       </ul>
-      <h1>{count % 2 === 0 ? count : count - 1}</h1>
+      <h1>{isEven ? count : count - 1}</h1>
       <button onClick={increment}>+</button>
     </div>
   );
