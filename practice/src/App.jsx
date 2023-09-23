@@ -1,22 +1,47 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./App.css";
-import { List } from "./components/List/List";
+import { ListItem } from "components/ListItem";
 
 function App() {
-  const data = [
-    { name: "Alex", age: 20, isMan: true, id: 1 },
-    { name: "Alin", age: 20, isMan: false, id: 2 },
-    { name: "Den", age: 22, isMan: true, id: 3 },
-    { name: "Flex", age: 11, isMan: true, id: 4 },
-    { name: "Pavel", age: 25, isMan: true, id: 5 },
+  const dataWithName = [
+    { name: "Alex", id: 1 },
+    { name: "Alin", id: 2 },
+    { name: "Den", id: 3 },
+    { name: "Flex", id: 4 },
+    { name: "Pavel", id: 5 },
   ];
+  const [data, setData] = useState(dataWithName);
+
+  const refInput = useRef(null);
+
+  const validRef = () => {
+    refInput.current.focus();
+  };
+
+  const handleEnterKey = (e) => {
+    if (e.key === "Enter" && refInput.current.value.trim() !== "") {
+      const newData = [
+        ...data,
+        { name: refInput.current.value, id: data.length + 1 },
+      ];
+      setData(newData);
+      refInput.current.value = "";
+    }
+  };
 
   return (
     <div className="App">
+      <input
+        type="text"
+        ref={refInput}
+        placeholder="Добавьте Имя"
+        onKeyDown={handleEnterKey}
+      />
+      <button onClick={validRef}>Нажми для фокуса на поле ввода</button>
       <h1>
-        <ul>
+        <ul className="list">
           {data.map((data) => {
-            return <List data={data} />;
+            return <ListItem data={data} key={data.id} />;
           })}
         </ul>
       </h1>
