@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./App.css";
-import { ListItem } from "components/ListItem";
+import { useTheme } from "context/ThemeContext";
+import { ListItem, ToggleTheme } from "components";
 
 function App() {
   const dataWithName = [
@@ -11,6 +12,7 @@ function App() {
     { name: "Pavel", id: 5 },
   ];
   const [data, setData] = useState(dataWithName);
+  const { isDarkMode } = useTheme();
 
   const refInput = useRef(null);
 
@@ -30,7 +32,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className={`App ${isDarkMode ? "dark" : "light"}`}>
       <input
         type="text"
         ref={refInput}
@@ -45,6 +47,7 @@ function App() {
           })}
         </ul>
       </h1>
+      <ToggleTheme />
     </div>
   );
 }

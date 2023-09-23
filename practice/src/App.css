@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   font-family: Arial, sans-serif;
-  padding: 20px;
+  height: 100vh;
 }
 
 input {
@@ -28,4 +28,15 @@ button:hover {
   margin: 0 auto;
   list-style: none;
   padding: 0;
+}
+
+.dark {
+  background-color: #2b3e51;
+  transition: background-color 0.3s; 
+}
+
+.light {
+  background-color: #f0f0f0;
+  color: #2b3e51; 
+  transition: background-color 0.3s; 
 }
